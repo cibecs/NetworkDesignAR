@@ -151,21 +151,6 @@ La planimetria dell'ufficio è la seguente:
 Come possiamo vedere dalla immagine \ref{fig:floorplan} l'ufficio è composto da 8 ambienti distinti, ognuno con un utilizzo specifico. Questa suddivisione ci permetterà di progettare una rete che soddisfi le esigenze di ciascun ambiente, garantendo prestazioni ottimali e sicurezza.
 
 
-\section{Divisione della Rete Interna e Partizione Wi-Fi}
-La rete interna sarà suddivisa in più VLAN (Virtual Local Area Network) per isolare i diversi ambienti:
-
-\begin{itemize}
-    \item \textbf{VLAN 10}: Uffici principali (Ufficio 2, Ufficio 3, Ufficio 6)
-    \item \textbf{VLAN 20}: Uffici speciali (Ufficio 1, Ufficio 7, Ufficio 8)
-    \item \textbf{VLAN 30}: Uffici di servizio (Ufficio 4, Ufficio 5)
-\end{itemize}
-
-La rete Wi-Fi sarà partizionata in due reti principali:
-\begin{itemize}
-    \item \textbf{Wi-Fi per i dipendenti}: con accesso a risorse aziendali interne.
-    \item \textbf{Wi-Fi per ospiti}: accesso limitato a Internet per maggiore sicurezza.
-\end{itemize}
-
 \section{Scelta dei Dispositivi}
 
 \subsection{Dispositivi per connessione LAN Cablata}
@@ -202,9 +187,11 @@ I seguenti dispositivi saranno preferiti per una connessione Wi-Fi:
 
 \section{Schema di Rete}
 
-La rete aziendale è progettata per garantire connessioni sicure e ad alte prestazioni. Il \textbf{router} è responsabile della connessione del network aziendale con l'esterno (Internet). Successivamente, il traffico passa attraverso un \textbf{firewall}, che garantisce la sicurezza della rete, filtrando e monitorando i dati in entrata e in uscita. Il firewall è collegato ad uno \textbf{switch principale (core switch)}, che funge da nodo centrale per le connessioni interne.
+La topologia del network rappresenta una rete aziendale ben strutturata che combina connessioni cablate e wireless, progettata per garantire connessioni sicure e ad alte prestazioni. Il \textbf{router} è responsabile della connessione del network aziendale con l'esterno (Internet), e per migliorare la resilienza, la rete implementa ridondanza utilizzando due fornitori di servizi Internet differenti. Successivamente, il traffico passa attraverso un \textbf{firewall (ASA 5506-X)}, che garantisce la sicurezza della rete, filtrando e monitorando i dati in entrata e in uscita. 
 
-Dal \textbf{core switch} partono le connessioni verso un \textbf{server}, utilizzato per la gestione dei dati aziendali, e verso due \textbf{switch degli uffici}, che distribuiscono la connettività ai dispositivi delle varie stanze. Gli switch degli uffici sono collegati a tre \textbf{Access Point Wi-Fi} localizzati nei due uffici più grandi e nella sala relax per garantire una copertura wireless efficiente. Inoltre, ogni switch è collegato direttamente ai \textbf{PC fissi} degli uffici tramite \textbf{cavi Ethernet}, per assicurare velocità di connessione elevate e stabili. Questa configurazione garantisce un'architettura di rete bilanciata e sicura, in grado di gestire sia le connessioni cablate che wireless con affidabilità.
+Il firewall è collegato ad uno \textbf{switch principale (core switch 2960-24TT)}, che funge da nodo centrale per le connessioni interne. Dal core switch partono le connessioni verso un \textbf{server} per la gestione dei dati aziendali e verso due \textbf{switch degli uffici}, che distribuiscono la connettività ai dispositivi delle varie stanze. Gli switch degli uffici sono collegati a tre \textbf{Access Point Wi-Fi (Meraki MX65W)} localizzati nei due uffici più grandi e nella sala relax, garantendo una copertura wireless efficiente. 
+
+Inoltre, ogni switch è collegato direttamente ai \textbf{PC fissi} degli uffici tramite \textbf{cavi Ethernet}, per assicurare alte prestazioni e stabilità nella connessione. Questo design bilancia le esigenze di sicurezza, prestazioni e flessibilità per un'azienda moderna, sfruttando sia le connessioni cablate che wireless con un'architettura ridondante per garantire continuità di servizio in caso di guasti nella connettività esterna.
 
 
 \begin{center}
